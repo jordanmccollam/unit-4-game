@@ -1,0 +1,59 @@
+body {
+    background: url("../images/abstract.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.game-content {
+    background: rgba(40,11,36, 0.5);
+}
+
+.avengers-logo img {
+    width: 400px;
+}
+
+.text-logo {
+    color:#ec9207;
+}
+
+.border-logo {
+    border: 1px solid #ec9207;
+}
+
+.display-4 {
+    font-size: 20px;
+}
+
+.avengers-logo img {
+    position: relative;
+    right: 100px;
+}
+
+/* ******************** */
+/* CHARACTERS */
+.characters img {
+    width: 150px;
+    height: 138px;
+}
+
+.good-characters img:hover {
+    background: rgba(236,146,7, 0.2);
+}
+
+.bg-danger {
+    background: rgba(220,53,69, 0.4) !important;
+}
+
+.bg-success {
+    background: rgba(40,167,69, 0.4) !important;
+}
+.bg-danger:hover {
+    background: rgba(133, 30, 40, 0.4) !important;
+}
+
+/* .bg-success:hover {
+    background: rgba(22, 90, 38, 0.4) !important;
+} */
