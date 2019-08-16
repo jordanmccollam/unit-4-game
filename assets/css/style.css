@@ -39,7 +39,7 @@ body {
     height: 138px;
 }
 
-.good-characters img:hover {
+.bg-hover:hover {
     background: rgba(236,146,7, 0.2);
 }
 
@@ -54,6 +54,8 @@ body {
     background: rgba(133, 30, 40, 0.4) !important;
 }
 
-/* .bg-success:hover {
-    background: rgba(22, 90, 38, 0.4) !important;
-} */
+.btn-lg {
+    /* width: 300px; */
+    /* height: 100px; */
+    font-size: 50px;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Avengers RPG</title>
 
     <!-- JQUERY -->
     <script
@@ -27,13 +27,22 @@
                 <!-- HEADING -->
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="display-3 text-logo pb-3 text-center heading">Choose your character!</h2>
+                        <h2 class="display-3 text-logo pb-3 text-center heading">AVENGERS RPG</h2>
                     </div>
                 </div>
+
+                <!-- STARTING SCREEN -->
+                <div class="row start-screen">
+                    <div class="col-12 text-center">
+                        <button class="btn btn-lg btn-danger mt-5 start-btn">START</button>
+                    </div>
+                </div>
+
+
                 <div class="row">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-4">
-                        <h3 class="d-none display-4 text-white text-center border-bottom border-secondary instructions">Click the enemy to attack</h3>
+                        <h3 class="display-4 text-white text-center border-bottom border-secondary instructions">Click the enemy to attack</h3>
                     </div>
                     <div class="col-lg-4"></div>
                 </div>
@@ -41,63 +50,28 @@
                 <div class="characters">
                     <!-- ******************* -->
                     <!-- GOOD SIDE -->
-                    <div class="row good-characters battle-zone">
-                        <!-- CAPTAIN AMERICA -->
-                        <div class="col-lg-4 text-center" id="cap">
-                            <h3 class="display-4 text-white">Captain America</h3>
-                            <img src="assets/images/cap.png" alt="Captain America" class="border-top border-bottom border-success good">
-                            <h3 class="display-4 text-white cap-hp user-hp"></h3>
-                        </div>
-                        <!-- SPIDERMAN -->
-                        <div class="col-lg-4 text-center" id="spiderman">
-                            <h3 class="display-4 text-white">Spiderman</h3>
-                            <img src="assets/images/spiderman.png" alt="Spiderman" class="border-top border-bottom border-success good">
-                            <h3 class="display-4 text-white spiderman-hp user-hp"></h3>
-                        </div>
-                        <!-- IRON MAN -->
-                        <div class="col-lg-4 text-center" id="ironman">
-                            <h3 class="display-4 text-white">Iron Man</h3>
-                            <img src="assets/images/ironman.png" alt="Captain America" class="border-top border-bottom border-success good">
-                            <h3 class="display-4 text-white ironman-hp user-hp"></h3>
-                        </div>
+                    <div class="row good-characters"></div>
 
-                        <!-- ************************* -->
-                        <!-- VERSUS HEADING -->
-                        <div class="col-lg-4 versus-heading d-none">
+                    <!-- ************************* -->
+                    <!-- BATTLE ZONE -->
+                    <div class="row battle-zone">
+                        <div class="col-lg-4 versus-heading">
                             <h3 class="text-logo text-center pt-5 display-3">VS</h3>
                         </div>
                     </div>
-
-                    <!-- Enemies remaining section -->
-                    <div class="row">
-                        <div class="col-lg-4"></div>
-                        <div class="col-lg-4">
-                            <h3 class="d-none display-4 text-white text-center border-bottom border-secondary instructions2">Enemies remaining</h3>
-                        </div>
-                        <div class="col-lg-4"></div>
-                    </div>
-
+                    
                     <!-- ************************* -->
                     <!-- BAD SIDE -->
-                    <div class="row mt-3 pt-3 evil-opponents d-none">
-                        <!-- LOKI -->
-                        <div class="col-lg-4 text-center" id="loki">
-                            <h3 class="display-4 text-white">Loki</h3>
-                            <img src="assets/images/loki.png" alt="Loki" class="border-top border-bottom border-danger evil bg-danger">
-                            <h3 class="display-4 text-white loki-hp"></h3>
+                    <!-- Enemies remaining section -->
+                    <div class="bad-side">
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <h3 class="display-4 text-white text-center border-bottom border-secondary">Enemies remaining</h3>
+                            </div>
+                            <div class="col-lg-4"></div>
                         </div>
-                        <!-- Ultron -->
-                        <div class="col-lg-4 text-center" id="ultron">
-                            <h3 class="display-4 text-white">Ultron</h3>
-                            <img src="assets/images/ultron.png" alt="Ultron" class="border-top border-bottom border-danger evil bg-danger">
-                            <h3 class="display-4 text-white ultron-hp"></h3>
-                        </div>
-                        <!-- THANOS -->
-                        <div class="col-lg-4 text-center" id="thanos">
-                            <h3 class="display-4 text-white">Thanos</h3>
-                            <img src="assets/images/thanos.png" alt="Thanos" class="border-top border-bottom border-danger evil bg-danger">
-                            <h3 class="display-4 text-white thanos-hp"></h3>
-                        </div>
+                        <div class="row mt-3 pt-3 evil-characters"></div>
                     </div>
                 </div>
             </div>
@@ -111,6 +85,46 @@
 
         </div>
     <!-- END of container -->
+    </div>
+
+    <div class="graveyard d-none">
+                                <!-- CAPTAIN AMERICA -->
+                                <div class="col-lg-4 text-center" id="cap">
+                                    <h3 class="display-4 text-white">Captain America</h3>
+                                    <img src="assets/images/cap.png" alt="Captain America" class="border-top border-bottom border-success good bg-hover bg-cap">
+                                    <h3 class="display-4 text-white" id="cap-hp"></h3>
+                                </div>
+                                <!-- SPIDERMAN -->
+                                <div class="col-lg-4 text-center" id="spiderman">
+                                    <h3 class="display-4 text-white">Spiderman</h3>
+                                    <img src="assets/images/spiderman.png" alt="Spiderman" class="border-top border-bottom border-success good bg-hover bg-spiderman">
+                                    <h3 class="display-4 text-white" id="spiderman-hp"></h3>
+                                </div>
+                                <!-- IRON MAN -->
+                                <div class="col-lg-4 text-center" id="ironman">
+                                    <h3 class="display-4 text-white">Iron Man</h3>
+                                    <img src="assets/images/ironman.png" alt="Captain America" class="border-top border-bottom border-success good bg-hover bg-ironman">
+                                    <h3 class="display-4 text-white" id="ironman-hp"></h3>
+                                </div>
+
+                            <!-- LOKI -->
+                            <div class="col-lg-4 text-center" id="loki">
+                                <h3 class="display-4 text-white">Loki</h3>
+                                <img src="assets/images/loki.png" alt="Loki" class="border-top border-bottom border-danger evil bg-loki bg-hover">
+                                <h3 class="display-4 text-white loki-hp"></h3>
+                            </div>
+                            <!-- Ultron -->
+                            <div class="col-lg-4 text-center" id="ultron">
+                                <h3 class="display-4 text-white">Ultron</h3>
+                                <img src="assets/images/ultron.png" alt="Ultron" class="border-top border-bottom border-danger evil bg-ultron bg-hover">
+                                <h3 class="display-4 text-white ultron-hp"></h3>
+                            </div>
+                            <!-- THANOS -->
+                            <div class="col-lg-4 text-center" id="thanos">
+                                <h3 class="display-4 text-white">Thanos</h3>
+                                <img src="assets/images/thanos.png" alt="Thanos" class="border-top border-bottom border-danger evil bg-thanos bg-hover">
+                                <h3 class="display-4 text-white thanos-hp"></h3>
+                            </div>
     </div>
 
     

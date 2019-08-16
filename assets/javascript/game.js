@@ -11,243 +11,378 @@ $(document).ready(function() {
     // HEROS
     var cap = {
         name: "Cap",
-        hp: 0,
-        dp: 0,
-        basedp: 0,
+        hp: 140,
+        dp: 3,
+        basedp: 3,
     }
     var spiderman = {
         name: "Spidy",
-        hp: 0,
-        dp: 0,
-        basedp: 0,
+        hp: 100,
+        dp: 6,
+        basedp: 6,
     }
     var ironman = {
-        name: "Ironman",
-        hp: 0,
-        dp: 0,
-        basedp: 0,
+        name: "Mr. Stark",
+        hp: 120,
+        dp: 4,
+        basedp: 4,
     }
-    // VILLAINS
+    // ENEMIES
     var loki = {
-        hp: 0,
-        dp: 0,
+        name: "Loki",
+        hp: 180,
+        dp: 6,
     }
     var ultron = {
-        hp: 0,
-        dp: 0,
+        name: "Ultron",
+        hp: 140,
+        dp: 7,
     }
     var thanos = {
-        hp: 0,
-        dp: 0,
+        name: "Thanos",
+        hp: 160,
+        dp: 10,
     }
 
-    var userCharacter = "";
+    var hero = "";
+    var defender = "";
 
-    // set stats to starting point
-    setStats();
+    // Display the values
+    $("#cap-hp").html("HP: " + cap.hp + " | " + "DP: " + cap.dp);
+    $("#spiderman-hp").html("HP: " + spiderman.hp + " | " + "DP: " + spiderman.dp);
+    $("#ironman-hp").html("HP: " + ironman.hp + " | " + "DP: " + ironman.dp);
+    $(".loki-hp").html("HP: " + loki.hp + " | " + "DP: " + loki.dp);
+    $(".ultron-hp").html("HP: " + ultron.hp + " | " + "DP: " + ultron.dp);
+    $(".thanos-hp").html("HP: " + thanos.hp + " | " + "DP: " + thanos.dp);
 
-    // ****************************
-    // Character selection sequence
-    characterSelect();
-    function characterSelect() {
-        // IF USER CHOOSES CAP
-        $(capBtn).on('click', function() {
-            userCharacter = cap;
-            $(".good").addClass("bg-success");
-            $("#ironman, #spiderman").addClass("d-none");
-            $(".evil-characters").addClass("d-none");
-            $(".evil-opponents").removeClass("d-none");
-            $(".heading").html("Choose an enemy to attack!");
-            $(".instructions2").removeClass("d-none");
-            defenderSelect();
-        })
-        // IF USER CHOOSES SPIDERMAN
-        $(spidermanBtn).on('click', function() {
-            userCharacter = spiderman;
-            $(".good").addClass("bg-success");
-            $("#ironman, #cap").addClass("d-none");
-            $(".evil-characters").addClass("d-none");
-            $(".evil-opponents").removeClass("d-none");
-            $(".heading").html("Choose an enemy to attack!");
-            $(".instructions2").removeClass("d-none");
-            defenderSelect();
-        })
-        // IF USER CHOOSES IRONMAN
-        $(ironmanBtn).on('click', function() {
-            userCharacter = ironman;
-            $(".good").addClass("bg-success");
-            $("#cap, #spiderman").addClass("d-none");
-            $(".evil-characters").addClass("d-none");
-            $(".evil-opponents").removeClass("d-none");
-            $(".heading").html("Choose an enemy to attack!");
-            $(".instructions2").removeClass("d-none");
-            defenderSelect();
-        })
+    // setStats();
+    reset();
+
+    // RESET
+    // ***********************
+    function reset() {
+        // Hide ALL screens
+        $(".start-screen, .instructions, .versus-heading, .good-characters, .bad-side").addClass("d-none");
+        // Move ALL characters to starting positions
+        $(".good-characters").append(capBtn, spidermanBtn, ironmanBtn);
+        $(".evil-characters").append(lokiBtn, ultronBtn, thanosBtn);
+        // Clear all BGs
+        $(".bg-cap, .bg-spiderman, .bg-ironman").removeClass("bg-success");
+        // Reset TITLE
+        $(".heading").html("AVENGERS RPG");
+        // Remove hp classes
+        $("#cap-hp").removeClass("user-hp");
+        $("#spiderman-hp").removeClass("user-hp");
+        $("#ironman-hp").removeClass("user-hp");
+
+        startSequence();
     };
+    // ***********************
 
+
+    // START SCREEN
     // **************************
-    // Defender selection sequence
-    function defenderSelect() {
-        // IF USER CHOOSES LOKI
-        $(lokiBtn).on('click', function() {
-            $(".versus-heading").removeClass("d-none");
-            $(".battle-zone").append($("#loki"));
-            $(".evil-opponents").append($("#ultron"));
-            $(".evil-opponents").append($("#thanos"));
-            $(".heading").html("Battle!");
-            $(".instructions").html("Click the enemy to attack");
-            $(".instructions").removeClass("d-none");
-        })
-        // IF USER CHOOSES ULTRON
-        $(ultronBtn).on('click', function() {
-            $(".versus-heading").removeClass("d-none");
-            $(".battle-zone").append($("#ultron"));
-            $(".evil-opponents").append($("#loki"));
-            $(".evil-opponents").append($("#thanos"));
-            $(".heading").html("Battle!");
-            $(".instructions").html("Click the enemy to attack");
-            $(".instructions").removeClass("d-none");
-        })
-        // IF USER CHOOSES THANOS
-        $(thanosBtn).on('click', function() {
-            $(".versus-heading").removeClass("d-none");
-            $(".battle-zone").append($("#thanos"));
-            $(".evil-opponents").append($("#loki"));
-            $(".evil-opponents").append($("#ultron"));
-            $(".heading").html("Battle!");
-            $(".instructions").html("Click the enemy to attack");
-            $(".instructions").removeClass("d-none");
-        })
-        attack();
-    };
-
-    // ***************************
-    // ATTACK
-    function attack() {
-        // If attacking LOKI
-        $("#loki").on('click', function() {
-            // user attacks
-            loki.hp = loki.hp - userCharacter.dp;
-            userCharacter.dp = userCharacter.dp + userCharacter.basedp;
-            $(".loki-hp").html(loki.hp);
-            // opponenet attacks
-            userCharacter.hp = userCharacter.hp - loki.dp;
-            $(".user-hp").html("HP: " + userCharacter.hp + " | " + "DP: " + userCharacter.dp);
-            killLoki();
-            lose();
-        })
-        // If attacking ultron
-        $("#ultron").on('click', function() {
-            // user attacks
-            ultron.hp = ultron.hp - userCharacter.dp;
-            userCharacter.dp = userCharacter.dp + userCharacter.basedp;
-            $(".ultron-hp").html(ultron.hp);
-            // opponenet attacks
-            userCharacter.hp = userCharacter.hp - ultron.dp;
-            $(".user-hp").html("HP: " + userCharacter.hp + " | " + "DP: " + userCharacter.dp);
-            killUltron();
-            lose();
-        })
-        // If attacking thanos
-        $("#thanos").on('click', function() {
-            // user attacks
-            thanos.hp = thanos.hp - userCharacter.dp;
-            userCharacter.dp = userCharacter.dp + userCharacter.basedp;
-            $(".thanos-hp").html(thanos.hp);
-            // opponenet attacks
-            userCharacter.hp = userCharacter.hp - thanos.dp;
-            $(".user-hp").html("HP: " + userCharacter.hp + " | " + "DP: " + userCharacter.dp);
-            killThanos();
-            lose();
+    function startSequence() {
+        // Display start screen
+        $(".start-screen").removeClass("d-none");
+        // Click start button
+        $(".start-btn").on('click', function() {
+            // Remove start screen
+            $(".start-screen").addClass("d-none");
+            
+            chooseCharacter();
         })
     };
+    // **************************
 
-    // ************************
-    // KILL SEQUENCES
-    function killLoki() {
-        if (loki.hp <= 0) {
-            $(lokiBtn).addClass("d-none");
-            $(".heading").html("Choose your next opponent");
-            $(".evil-opponents").on('click', function() {
-                $(".heading").html("Battle!");
+
+    // CHOOSE CHARACTER
+    // **************************
+    function chooseCharacter() {
+        // display character page
+        $(".good-characters").removeClass("d-none");
+        // Change TITLE
+        $(".heading").html("Choose your hero!");
+            // IF USER CHOOSES CAP
+            $(capBtn).on('click', function() {
+                chooseCap();
+                chooseDefender();
+            })
+            $(spidermanBtn).on('click', function() {
+                chooseSpiderman();
+                chooseDefender();
+            })
+            $(ironmanBtn).on('click', function() {
+                chooseIronman();
+                chooseDefender();
+            })
+    };
+    // **************************
+
+
+    // CHOOSE DEFENDER
+    // **************************
+    function chooseDefender() {
+        defender = ""
+        // hide other pages
+        $(".instructions, .versus-heading").addClass("d-none");
+        // give BGs 
+        $(".bg-loki, .bg-ultron, .bg-thanos").addClass("bg-hover");
+        // display enemies page
+        $(".bad-side").removeClass("d-none");
+        // Change TITLE
+        $(".heading").html("Choose an enemy to attack!");
+            // IF USER CHOOSES LOKI
+            $(lokiBtn).on('click', function() {
+                chooseLoki();
+                battle();
+            })
+            $(ultronBtn).on('click', function() {
+                chooseUltron();
+                battle();
+            })
+            $(thanosBtn).on('click', function() {
+                chooseThanos();
+                battle();
+            })
+    };
+    // **************************
+
+
+    // BATTLE
+    // **************************
+    function battle() {
+        if (defender === loki) {
+            $(lokiBtn).on('click', function() {
+                // ONLY WHILE DEFENDER IS ALIVE
+                if (defender.hp >= 0) {
+                    // hero deals damage
+                    defender.hp = defender.hp - hero.dp;
+                    $(".loki-hp").html("HP: " + defender.hp + " | " + "DP: " + defender.dp);
+                    // defender deals damage
+                    hero.hp = hero.hp - defender.dp;
+                    $(".user-hp").html("HP: " + hero.hp + " | " + "DP: " + hero.dp);
+                }
+                // EVERY CLICK (dead or alive)
+                // hero dp increases
+                hero.dp = hero.dp + hero.basedp;
+                $(".user-hp").html("HP: " + hero.hp + " | " + "DP: " + hero.dp);
+                
+                kill();
+                lose();
             })
         }
-        // IF VICTORY
-        if (loki.hp <= 0 && ultron.hp <= 0 && thanos.hp <= 0) {
-            victory();
-        }
-    };
-    function killUltron() {
-        if (ultron.hp <= 0) {
-            $(ultronBtn).addClass("d-none");
-            $(".heading").html("Choose your next opponent");
-            $(".evil-opponents").on('click', function() {
-                $(".heading").html("Battle!");
+        if (defender === ultron) {
+            $(ultronBtn).on('click', function() {
+                // ONLY WHILE DEFENDER IS ALIVE
+                if (defender.hp >= 0) {
+                    // hero deals damage
+                    defender.hp = defender.hp - hero.dp;
+                    $(".ultron-hp").html("HP: " + defender.hp + " | " + "DP: " + defender.dp);
+                    // defender deals damage
+                    hero.hp = hero.hp - defender.dp;
+                    $(".user-hp").html("HP: " + hero.hp + " | " + "DP: " + hero.dp);
+                }
+                // EVERY CLICK (dead or alive)
+                // hero dp increases
+                hero.dp = hero.dp + hero.basedp;
+                $(".user-hp").html("HP: " + hero.hp + " | " + "DP: " + hero.dp);
+                
+                kill();
+                lose();
             })
         }
-        // IF VICTORY
-        if (loki.hp <= 0 && ultron.hp <= 0 && thanos.hp <= 0) {
-            victory();
-        }
-    };
-    function killThanos() {
-        if (thanos.hp <= 0) {
-            $(thanosBtn).addClass("d-none");
-            $(".heading").html("Choose your next opponent");
-            $(".evil-opponents").on('click', function() {
-                $(".heading").html("Battle!");
+        if (defender === thanos) {
+            $(thanosBtn).on('click', function() {
+                // ONLY WHILE DEFENDER IS ALIVE
+                if (defender.hp >= 0) {
+                    // hero deals damage
+                    defender.hp = defender.hp - hero.dp;
+                    $(".thanos-hp").html("HP: " + defender.hp + " | " + "DP: " + defender.dp);
+                    // defender deals damage
+                    hero.hp = hero.hp - defender.dp;
+                    $(".user-hp").html("HP: " + hero.hp + " | " + "DP: " + hero.dp);
+                }
+                // EVERY CLICK (dead or alive)
+                // hero dp increases
+                hero.dp = hero.dp + hero.basedp;
+                $(".user-hp").html("HP: " + hero.hp + " | " + "DP: " + hero.dp);
+
+                kill();
+                lose();
             })
         }
-        // IF VICTORY
-        if (loki.hp <= 0 && ultron.hp <= 0 && thanos.hp <= 0) {
-            victory();
-        }
     };
+    // **************************
 
-    // ON LOSS
-    function lose() {
-        if(userCharacter.hp <= 0) {
-            alert("You lost! Try again!")
-            location.reload();
+    // ON KILL
+    // **************************
+    function kill() {
+        if (defender.hp <= 0) {
+            if (defender === loki) {
+                alert("You defeated " + defender.name + "!");
+                $(".graveyard").append(lokiBtn);
+                chooseDefender();
+            }
+            if (defender === ultron) {
+                alert("You defeated " + defender.name + "!");
+                $(".graveyard").append(ultronBtn);
+                chooseDefender();
+            }
+            if (defender === thanos) {
+                alert("You defeated " + defender.name + "!");
+                $(".graveyard").append(thanosBtn);
+                chooseDefender();
+            }
         }
-    };
 
-    // ON VICTORY (all enemies are dead)
+        victory();
+    }
+    // **************************
+
+
+    // If user WINS
+    // **************************
     function victory() {
-        alert("Victory! You saved the world, " + userCharacter.name + "!");
-        location.reload();
+        if (loki.hp <= 0 && ultron.hp <= 0 && thanos.hp <= 0) {
+            alert("Victory! You saved the world, " + hero.name + "!");
+            setStats();
+            reset();
+        }
     };
+    // **************************
 
-    // ***************************
-    // Set stats
+    // If user LOSES
+    // **************************
+    function lose() {
+        if (hero.hp <= 0) {
+            alert("You lost! Try again!");
+            setStats();
+            reset();
+        }
+    };
+    // **************************
+
+
+    // Stats back to starting
+    // **************************
     function setStats() {
         // Reset variables
-        cap.hp = 180;
-        cap.dp = 5;
-        cap.basedp = 5;
+        cap.hp = 140;
+        cap.dp = 3;
+        cap.basedp = 3;
         spiderman.hp = 100;
         spiderman.dp = 6;
         spiderman.basedp = 6;
-        ironman.hp = 150;
-        ironman.dp = 6;
-        ironman.basedp = 6;
+        ironman.hp = 120;
+        ironman.dp = 4;
+        ironman.basedp = 4;
         loki.hp = 180;
         loki.dp = 6;
         ultron.hp = 140;
         ultron.dp = 7;
         thanos.hp = 160;
         thanos.dp = 10;
+
+        hero = "";
+        defender = "";
+
         // Display the rest values
-        $(".cap-hp").html("HP: " + cap.hp + " | " + "DP: " + cap.dp);
-        $(".spiderman-hp").html("HP: " + spiderman.hp + " | " + "DP: " + spiderman.dp);
-        $(".ironman-hp").html("HP: " + ironman.hp + " | " + "DP: " + ironman.dp);
+        $("#cap-hp").html("HP: " + cap.hp + " | " + "DP: " + cap.dp);
+        $("#spiderman-hp").html("HP: " + spiderman.hp + " | " + "DP: " + spiderman.dp);
+        $("#ironman-hp").html("HP: " + ironman.hp + " | " + "DP: " + ironman.dp);
         $(".loki-hp").html("HP: " + loki.hp + " | " + "DP: " + loki.dp);
         $(".ultron-hp").html("HP: " + ultron.hp + " | " + "DP: " + ultron.dp);
         $(".thanos-hp").html("HP: " + thanos.hp + " | " + "DP: " + thanos.dp);
     };
-
-
-
-
-
+// CHARACTER SELECTIONS
+// *** *** *** *** *** ***
+// HEROS
+function chooseCap() {
+    hero = cap;
+    // move to battle zone
+    $(".battle-zone").prepend(capBtn);
+    // hide other heros
+    $(".good-characters").addClass("d-none");
+    // Give BG
+    $(".bg-cap").addClass("bg-success");
+    // Give hp class
+    $("#cap-hp").addClass("user-hp");
+    // turn off click event
+    $(capBtn).off('click');
+};
+function chooseSpiderman() {
+    hero = spiderman;
+    // move to battle zone
+    $(".battle-zone").prepend(spidermanBtn);
+    // hide other heros
+    $(".good-characters").addClass("d-none");
+    // Give BG
+    $(".bg-spiderman").addClass("bg-success");
+    // Give hp class
+    $("#spiderman-hp").addClass("user-hp");
+    // turn off click event
+    $(spidermanBtn).off('click');
+};
+function chooseIronman() {
+    hero = ironman;
+    // move to battle zone
+    $(".battle-zone").prepend(ironmanBtn);
+    // hide other heros
+    $(".good-characters").addClass("d-none");
+    // Give BG
+    $(".bg-ironman").addClass("bg-success");
+    // Give hp class
+    $("#ironman-hp").addClass("user-hp");
+    // turn off click event
+    $(ironmanBtn).off('click');
+};
+// *** *** *** *** *** ***
+// ENEMIES
+function chooseLoki() {
+    defender = loki;
+    // move to battle zone
+    $(".battle-zone").append(lokiBtn);
+    // Give BG
+    $(".bg-loki").addClass("bg-danger");
+    // Remove other enemies BG
+    $(".bg-ultron, .bg-thanos").removeClass("bg-hover");
+    // Show instructions
+    $(".instructions, .versus-heading").removeClass("d-none");
+    // turn off click event(s)
+    $(lokiBtn).off('click');
+    $(ultronBtn).off('click');
+    $(thanosBtn).off('click');
+};
+function chooseUltron() {
+    defender = ultron;
+    // move to battle zone
+    $(".battle-zone").append(ultronBtn);
+    // Give BG
+    $(".bg-ultron").addClass("bg-danger");
+    // Remove other enemies BG
+    $(".bg-loki, .bg-thanos").removeClass("bg-hover");
+    // Show instructions
+    $(".instructions, .versus-heading").removeClass("d-none");
+    // turn off click event(s)
+    $(lokiBtn).off('click');
+    $(ultronBtn).off('click');
+    $(thanosBtn).off('click');
+};
+function chooseThanos() {
+    defender = thanos;
+    // move to battle zone
+    $(".battle-zone").append(thanosBtn);
+    // Give BG
+    $(".bg-thanos").addClass("bg-danger");
+    // Remove other enemies BG
+    $(".bg-loki, .bg-thanos").removeClass("bg-hover");
+    // Show instructions
+    $(".instructions, .versus-heading").removeClass("d-none");
+    // turn off click event(s)
+    $(lokiBtn).off('click');
+    $(ultronBtn).off('click');
+    $(thanosBtn).off('click');
+};
+// End of JS
 });
