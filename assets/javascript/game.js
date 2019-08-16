@@ -62,7 +62,7 @@ $(document).ready(function() {
     // ***********************
     function reset() {
         // Hide ALL screens
-        $(".start-screen, .instructions, .versus-heading, .good-characters, .bad-side").addClass("d-none");
+        $(".start-screen, .instructions, .versus-heading, .good-characters, .bad-side, .instructions-screen").addClass("d-none");
         // Move ALL characters to starting positions
         $(".good-characters").append(capBtn, spidermanBtn, ironmanBtn);
         $(".evil-characters").append(lokiBtn, ultronBtn, thanosBtn);
